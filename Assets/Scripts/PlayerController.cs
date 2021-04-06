@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum PlayerState
+{
+    Idle,
+    Run,
+    Jump,
+    Die
+}
 public class PlayerController : MonoBehaviour
 {
     [Header("Скорость и сила прыжка")]
@@ -18,18 +26,31 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject UiController;
 
-    
 
+
+    List<BaseState> states;
+    BaseState currentState;
 
     private void Awake()
     {
         rBode2D = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
+
+        states = new List<BaseState>(transform.GetComponentsInChildren<BaseState>(true));
+        states.ForEach(_state =>
+        {
+            _state.Setup(rBode2D, playerAnimator);
+        });
+
+        currentState = states.Find(_state => _state.PlayerState == PlayerState.Idle);
+        currentState.Activate();
+            
     }
     void Start()
     {
        
     }
+    PlayerState state;
 
     void Update()
     {
@@ -97,5 +118,16 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(dieClip.length + 2f);
         UiController.GetComponent<ControllerUI>().DieGame();
+    }
+
+    PlayerState State
+    {
+        get => State;
+
+        set
+        {
+            State = value;
+            
+        }
     }
 }
