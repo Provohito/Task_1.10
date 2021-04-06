@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D rBode2D;
     Animator playerAnimator;
+    SpriteRenderer playerR;
     [Header("Выбор клипа смерти и UI-контроллера")]
     [SerializeField]
     AnimationClip dieClip;
@@ -35,11 +36,13 @@ public class PlayerController : MonoBehaviour
     {
         rBode2D = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
+        playerR = GetComponent<SpriteRenderer>();
 
         states = new List<BaseState>(transform.GetComponentsInChildren<BaseState>(true));
         states.ForEach(_state =>
         {
-            _state.Setup(rBode2D, playerAnimator);
+            _state.Setup(rBode2D, playerAnimator, playerR);
+            _state.NextStateAction = OnNextStateRequest;
         });
 
         currentState = states.Find(_state => _state.PlayerState == PlayerState.Idle);
@@ -50,12 +53,11 @@ public class PlayerController : MonoBehaviour
     {
        
     }
-    PlayerState state;
 
-    void Update()
+    /*void Update()
     {
         float _horizontalValue = Input.GetAxis("Horizontal");
-        
+        float _jumpValue = Input.GetAxis("Jump");
         var _velocity = rBode2D.velocity;
         _velocity.x = Vector3.right.x * _horizontalValue * speed;
         if (_horizontalValue != 0 & _horizontalValue > 0)
@@ -88,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
         rBode2D.velocity = _velocity;
     }
-
+    */
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var _velocity = rBode2D.velocity;
@@ -102,32 +104,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag == "Enemy")
-        {
-            playerAnimator.SetBool("die", true);
-            StartCoroutine(GameEnd());
-        }
-        if (collision.transform.tag == "EndLevel")
-        {
-            UiController.GetComponent<ControllerUI>().EndGame();
-        }
+        currentState.OnCollision(collision);
     }
 
 
-    IEnumerator GameEnd()
+    void OnNextStateRequest(PlayerState _state)
     {
-        yield return new WaitForSeconds(dieClip.length + 2f);
-        UiController.GetComponent<ControllerUI>().DieGame();
-    }
-
-    PlayerState State
-    {
-        get => State;
-
-        set
-        {
-            State = value;
-            
-        }
+        currentState.Deactivate();
+        currentState = states.Find(_s => _s.PlayerState == _state);
+        currentState.Activate();
     }
 }
