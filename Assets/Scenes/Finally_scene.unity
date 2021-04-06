@@ -7248,7 +7248,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 345810605}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.2280912, y: -5.9916778, z: -0.09586268}
+  m_LocalPosition: {x: -6.228091, y: -5.9, z: -0.09586268}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1059580999}
@@ -7304,9 +7304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10214258e04a30448ab6ff83d11a2d6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
   jumpForce: 5
-  dieClip: {fileID: 7400000, guid: f2e9468a37f06f54aab5d2c611e09bea, type: 2}
   UiController: {fileID: 936116958}
 --- !u!95 &345810611
 Animator:
@@ -7595,7 +7593,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.7280912, y: -5.9916778, z: -10.095862}
+  m_LocalPosition: {x: -5.089904, y: -5.870689, z: -10.095862}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1982148720}
@@ -12507,7 +12505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UiController: {fileID: 936116958}
-  speed: 1
+  speed: 5
 --- !u!1 &1460073416
 GameObject:
   m_ObjectHideFlags: 0
@@ -12604,10 +12602,10 @@ MonoBehaviour:
   m_YDamping: 1
   m_ZDamping: 1
   m_TargetMovementOnly: 1
-  m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenX: 0.5364623
+  m_ScreenY: 0.50472766
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0.19
+  m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0.22
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
@@ -13228,8 +13226,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UiController: {fileID: 936116958}
-  speed: 1
-  jumpforce: 10
+  speed: 5
+  jumpforce: 4
 --- !u!1 &1736586305
 GameObject:
   m_ObjectHideFlags: 0
@@ -13827,7 +13825,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030774566}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.7280912, y: -5.9916778, z: -10.095862}
+  m_LocalPosition: {x: -5.089904, y: -5.870689, z: -10.095862}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1463464616}

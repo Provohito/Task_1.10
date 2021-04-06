@@ -9,6 +9,9 @@ public class IdleState : BaseState
         float _horizontalValue = Input.GetAxis("Horizontal");
         float _jumpValue = Input.GetAxis("Jump");
 
+        playerAnimator.SetBool("run", false);
+        playerAnimator.SetBool("jump", false);
+
         if (_horizontalValue != 0)
         {
             NextStateAction.Invoke(PlayerState.Run);

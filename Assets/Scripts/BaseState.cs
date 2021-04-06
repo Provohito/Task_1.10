@@ -5,18 +5,18 @@ using UnityEngine;
 
 public abstract class BaseState : MonoBehaviour
 {
-    static readonly int INT_STATE = Animator.StringToHash("State");
+    
 
     protected Rigidbody2D rBode2D;
     protected Animator playerAnimator;
     protected SpriteRenderer playerR;
     [SerializeField]
-    GameObject UiController;
+    protected GameObject UiController;
 
-    List<Collider2D> collider2D;
+    new List<Collider2D> collider2D;
     ContactFilter2D filter2D;
 
-
+    // Получение параметров для State-a
     public void Setup(Rigidbody2D _rBody2D, Animator _plaeyrAnimator, SpriteRenderer _playerR)
     {
         rBode2D = _rBody2D;
@@ -33,8 +33,6 @@ public abstract class BaseState : MonoBehaviour
     public virtual void Activate()
     {
         gameObject.SetActive(true);
-
-        playerAnimator.SetInteger(INT_STATE, (int)PlayerState);
     }
 
     public virtual void Deactivate()
@@ -47,8 +45,7 @@ public abstract class BaseState : MonoBehaviour
         if (collision.transform.tag == "Enemy")
         {
             NextStateAction.Invoke(PlayerState.Die);
-            playerAnimator.SetBool("die", true);
-            StartCoroutine(GameEnd());
+            
         }
         if (collision.transform.tag == "EndLevel")
         {
@@ -67,12 +64,6 @@ public abstract class BaseState : MonoBehaviour
 
             return _value;
         }
-    }
-
-    IEnumerator GameEnd()
-    {
-        yield return new WaitForSeconds(4f);
-        UiController.GetComponent<ControllerUI>().DieGame();
     }
 
 

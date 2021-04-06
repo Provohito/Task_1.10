@@ -11,6 +11,8 @@ public class RunState : BaseState
         float _horizontalValue = Input.GetAxis("Horizontal");
         float _jumpValue = Input.GetAxis("Jump");
 
+        playerAnimator.SetBool("run", true);
+
         var _velocity = rBode2D.velocity;
         _velocity.x = Vector3.right.x * _horizontalValue * speed;
 
@@ -32,10 +34,7 @@ public class RunState : BaseState
                 NextStateAction.Invoke(PlayerState.Idle);
             }
         }
-        else
-        {
-            NextStateAction.Invoke(PlayerState.Jump);
-        }
+        
     }
     public override PlayerState PlayerState => PlayerState.Run;
 }

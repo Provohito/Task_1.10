@@ -23,10 +23,8 @@ public class ControllerUI : MonoBehaviour
         }
         else if (value == "restart")
         {
-            Time.timeScale = 1;
-            dieWindow.SetActive(false);
             SceneManager.LoadScene("Finally_scene");
-            
+            Time.timeScale = 1;  
         }
         else if (value == "end")
         {

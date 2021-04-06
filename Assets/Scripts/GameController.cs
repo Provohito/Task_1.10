@@ -4,21 +4,16 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    
     [SerializeField]
     GameObject platform;
 
-
     bool movingRight;
 
-    
-    void Start()
-    {
-        
-    }
-
+    // Перемещение платформы
     void Update()
     {
-        if (platform.transform.position.y > 1.6)
+        if (platform.transform.position.y > 3)
         {
             movingRight = false;
         }

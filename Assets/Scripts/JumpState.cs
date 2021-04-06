@@ -21,6 +21,8 @@ public class JumpState : BaseState
     {
         float _horizontalValue = Input.GetAxis("Horizontal");
 
+        playerAnimator.SetBool("jump", true);
+
         var _velocity = rBode2D.velocity;
         _velocity.x = Vector3.right.x * _horizontalValue * speed;
 

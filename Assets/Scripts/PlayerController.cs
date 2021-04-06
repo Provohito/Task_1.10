@@ -12,18 +12,14 @@ public enum PlayerState
 }
 public class PlayerController : MonoBehaviour
 {
-    [Header("Скорость и сила прыжка")]
-    [SerializeField]
-    float speed = 1;
+    [Header("Скорость прыжка на лифте")]
     [SerializeField]
     float jumpForce = 1;
 
     Rigidbody2D rBode2D;
     Animator playerAnimator;
     SpriteRenderer playerR;
-    [Header("Выбор клипа смерти и UI-контроллера")]
-    [SerializeField]
-    AnimationClip dieClip;
+    [Header("Ui controller")]
     [SerializeField]
     GameObject UiController;
 
@@ -49,50 +45,9 @@ public class PlayerController : MonoBehaviour
         currentState.Activate();
             
     }
-    void Start()
-    {
-       
-    }
-
-    /*void Update()
-    {
-        float _horizontalValue = Input.GetAxis("Horizontal");
-        float _jumpValue = Input.GetAxis("Jump");
-        var _velocity = rBode2D.velocity;
-        _velocity.x = Vector3.right.x * _horizontalValue * speed;
-        if (_horizontalValue != 0 & _horizontalValue > 0)
-        {
-            playerAnimator.SetBool("run", true);
-            this.transform.rotation = Quaternion.Euler(0, 0, 0);
-
-        }
-        else if (_horizontalValue != 0 & _horizontalValue < 0)
-        {
-            playerAnimator.SetBool("run", true);
-            this.transform.rotation = Quaternion.Euler(0, 180, 0);
-
-        }
-        else if(_horizontalValue == 0)
-            playerAnimator.SetBool("run", false);
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (_velocity.y != 0)
-            {
-                return;
-            }
-            playerAnimator.SetBool("jump", true);
-            _velocity.y += Vector2.up.y * 1 * jumpForce;
-        }
-        else
-            playerAnimator.SetBool("jump", false);
-
-
-
-        rBode2D.velocity = _velocity;
-    }
-    */
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //Поднятие по лифту
         var _velocity = rBode2D.velocity;
         _velocity.y += Vector2.up.y * 3 * jumpForce;
         rBode2D.velocity = _velocity;
@@ -101,13 +56,13 @@ public class PlayerController : MonoBehaviour
             UiController.GetComponent<ControllerUI>().DieGame();
         }
     }
-
+    // Передаем объект колиизии в текущий State
     private void OnCollisionEnter2D(Collision2D collision)
     {
         currentState.OnCollision(collision);
     }
 
-
+    // переход к нужному State-у
     void OnNextStateRequest(PlayerState _state)
     {
         currentState.Deactivate();
