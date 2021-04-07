@@ -45,17 +45,6 @@ public class PlayerController : MonoBehaviour
         currentState.Activate();
             
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //Поднятие по лифту
-        var _velocity = rBode2D.velocity;
-        _velocity.y += Vector2.up.y * 3 * jumpForce;
-        rBode2D.velocity = _velocity;
-        if (collision.tag == "die")
-        {
-            UiController.GetComponent<ControllerUI>().DieGame();
-        }
-    }
     // Передаем объект колиизии в текущий State
     private void OnCollisionEnter2D(Collision2D collision)
     {
